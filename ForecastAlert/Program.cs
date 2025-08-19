@@ -12,7 +12,7 @@ using Microsoft.Extensions.Hosting;
 var builder = Host.CreateDefaultBuilder(args);
 
 builder.ConfigureFunctionsWorkerDefaults();
-builder.ConfigureServices(async void (services) =>
+builder.ConfigureServices(void (services) =>
 {
     services.AddHttpClient<IKartverketClient, KartverketClient>();
     services.AddHttpClient<IMetClient, MetClient>();
@@ -39,10 +39,10 @@ builder.ConfigureServices(async void (services) =>
     if (string.IsNullOrEmpty(blobName)) throw new Exception("BLOB_NAME not set");
     var blobClient = containerClient.GetBlobClient(blobName);
     
-    if (!await containerClient.ExistsAsync()) throw new Exception("Forecast alert not found");
+    if (! containerClient.Exists()) throw new Exception("Forecast alert not found");
     
-    await using var stream = await blobClient.OpenReadAsync();
-    var alarmConfig = await JsonSerializer.DeserializeAsync<AlarmConfig>(stream);
+    using var stream = blobClient.OpenRead();
+    var alarmConfig = JsonSerializer.Deserialize<AlarmConfig>(stream);
     if (alarmConfig == null) throw new Exception("No alarm config found");
     services.AddSingleton(alarmConfig);
     
