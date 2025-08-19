@@ -30,8 +30,14 @@ builder.ConfigureServices(async void (services) =>
     if (string.IsNullOrEmpty(blobString)) throw new Exception("BLOB_URI not set");
 
     var blobService = new BlobServiceClient(new Uri(blobString), credentials);
-    var containerClient =  blobService.GetBlobContainerClient("forecast");
-    var blobClient = containerClient.GetBlobClient("forecast");
+    
+    var blobContainerName =  Environment.GetEnvironmentVariable("BLOB_CONTAINER");
+    if (string.IsNullOrEmpty(blobContainerName)) throw new Exception("BLOB_CONTAINER not set");
+    var containerClient =  blobService.GetBlobContainerClient(blobContainerName);
+    
+    var blobName = Environment.GetEnvironmentVariable("BLOB_NAME");
+    if (string.IsNullOrEmpty(blobName)) throw new Exception("BLOB_NAME not set");
+    var blobClient = containerClient.GetBlobClient(blobName);
     
     if (!await containerClient.ExistsAsync()) throw new Exception("Forecast alert not found");
     
