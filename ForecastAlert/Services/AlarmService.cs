@@ -44,6 +44,7 @@ public class AlarmService(
                 $"Det er meldt høy vannstand (Over {tidalAlarm.MaxWaterLevels}cm) ved {locationName} på følgende dager:\n{string.Join("\n", times)}";
             slackClient.publish(message);
         }
+        logger.LogInformation("No high water levels for {LocationName} in the next few days", locationName);
     }
 
     private WindDirection DegreesToWindDirection(double degrees)
@@ -68,7 +69,10 @@ public class AlarmService(
                 .ToList();
 
         if (timeSeries.Count == 0)
+        {
+            logger.LogInformation("No wind speed alarm from {LocationName} in the next few days", locationName);
             return;
+        }
 
         List<string> lines;
 
