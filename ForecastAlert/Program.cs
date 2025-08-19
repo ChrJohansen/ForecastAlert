@@ -18,10 +18,11 @@ builder.ConfigureServices(async void (services) =>
     services.AddHttpClient<IMetClient, MetClient>();
     services.AddHttpClient<ISlackClient, SlackClient>();
 
-    var slackKey = Environment.GetEnvironmentVariable("SLACK_KEY");
-    if (string.IsNullOrEmpty(slackKey)) throw new Exception("SLACK_KEY not set");
-
-    services.AddSingleton(new SlackConfig { SlackKey = slackKey });
+    // var slackKey = Environment.GetEnvironmentVariable("SLACK_KEY");
+    // if (string.IsNullOrEmpty(slackKey)) throw new Exception("SLACK_KEY not set");
+    //
+    // services.AddSingleton(new SlackConfig { SlackKey = slackKey });
+    services.AddSingleton(new SlackConfig { SlackKey = "slackKey" });
     services.AddSingleton<IAlarmService, AlarmService>();
     services.AddSingleton<ILocationService, LocationService>();
 
