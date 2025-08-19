@@ -8,7 +8,7 @@ public class ForecastChecker(ILogger<ForecastChecker> logger, IKartverketClient 
 {
     [Function(nameof(ForecastChecker))]
     [FixedDelayRetry(5, "00:00:05")]
-    public async Task Run([TimerTrigger("0 */5 * * * *", RunOnStartup = true)] TimerInfo timerInfo)
+    public async Task Run([TimerTrigger("0 */5 * * * *")] TimerInfo timerInfo)
     {
         var tide = await kartverketClient.GetTidalForecast(latitude: "59.91273", longitude: "10.74609");
         logger.LogInformation("Got tidal info!");
