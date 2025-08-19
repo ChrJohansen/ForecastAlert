@@ -1,16 +1,21 @@
 using ForecastAlert.Clients;
+using ForecastAlert.domain;
+using ForecastAlert.Services;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 
 namespace ForecastAlert.AzureFunctions;
 
-public class ForecastChecker(ILogger<ForecastChecker> logger, IKartverketClient kartverketClient)
+public class ForecastChecker(ILogger<ForecastChecker> logger, AlarmConfig alarmConfig, ILocationService locationService)
 {
     [Function(nameof(ForecastChecker))]
     [FixedDelayRetry(5, "00:00:05")]
     public async Task Run([TimerTrigger("0 */5 * * * *")] TimerInfo timerInfo)
     {
-        var tide = await kartverketClient.GetTidalForecast(latitude: "59.91273", longitude: "10.74609");
-        logger.LogInformation("Got tidal info!");
+        foreach (var location in alarmConfig.Locations)
+        {
+            logger.LogInformation($"Checking {location}");
+            locationService.HandleLocation(location);
+        }
     }
 }
