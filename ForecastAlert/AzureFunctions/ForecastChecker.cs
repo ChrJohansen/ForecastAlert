@@ -1,4 +1,3 @@
-using ForecastAlert.Clients;
 using ForecastAlert.domain;
 using ForecastAlert.Services;
 using Microsoft.Azure.Functions.Worker;
@@ -14,7 +13,6 @@ public class ForecastChecker(ILogger<ForecastChecker> logger, AlarmConfig alarmC
     {
         foreach (var location in alarmConfig.Locations)
         {
-            logger.LogInformation($"Checking {location}");
             locationService.HandleLocation(location);
         }
     }
