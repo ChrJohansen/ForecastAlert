@@ -1,6 +1,4 @@
-﻿using Azure.Identity;
-using Azure.Security.KeyVault.Secrets;
-using Forecast;
+﻿using Forecast;
 using ForecastAlert;
 using ForecastAlert.Clients;
 using ForecastAlert.Services;
@@ -16,15 +14,11 @@ builder.ConfigureServices(async void (services) =>
     services.AddHttpClient<IMetClient, MetClient>();
     services.AddHttpClient<ISlackClient, SlackClient>();
     
-    var keyVaultName = Environment.GetEnvironmentVariable("KEY_VAULT_NAME");
-    var keyVaultUrl = $"https://{keyVaultName}.vault.azure.net/";
-    var client = new SecretClient(new Uri(keyVaultUrl), new DefaultAzureCredential());
-
-    const string secretName = "SlackKey";
-    var slackKey = await client.GetSecretAsync(secretName);
+    var slackKey = Environment.GetEnvironmentVariable("SLACK_KEY");
     
-    services.AddSingleton(new SlackConfig { SlackKey = slackKey.Value.Value });
+    if (string.IsNullOrEmpty(slackKey)) throw new Exception("SLACK_KEY not set");
     
+    services.AddSingleton(new SlackConfig { SlackKey = slackKey });
     
     services.AddSingleton<IAlarmService, AlarmService>();
     services.AddSingleton<ILocationService, LocationService>();
