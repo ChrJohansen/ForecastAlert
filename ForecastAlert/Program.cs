@@ -25,26 +25,26 @@ builder.ConfigureServices(async void (services) =>
     services.AddSingleton<IAlarmService, AlarmService>();
     services.AddSingleton<ILocationService, LocationService>();
 
-    // var credentials = new DefaultAzureCredential();
-    // var blobString = Environment.GetEnvironmentVariable("BLOB_URI");
-    // if (string.IsNullOrEmpty(blobString)) throw new Exception("BLOB_URI not set");
-    //
-    // var blobService = new BlobServiceClient(new Uri(blobString), credentials);
-    //
-    // var blobContainerName =  Environment.GetEnvironmentVariable("BLOB_CONTAINER");
-    // if (string.IsNullOrEmpty(blobContainerName)) throw new Exception("BLOB_CONTAINER not set");
-    // var containerClient =  blobService.GetBlobContainerClient(blobContainerName);
-    //
-    // var blobName = Environment.GetEnvironmentVariable("BLOB_NAME");
-    // if (string.IsNullOrEmpty(blobName)) throw new Exception("BLOB_NAME not set");
-    // var blobClient = containerClient.GetBlobClient(blobName);
-    //
-    // if (!await containerClient.ExistsAsync()) throw new Exception("Forecast alert not found");
-    //
-    // await using var stream = await blobClient.OpenReadAsync();
-    // var alarmConfig = await JsonSerializer.DeserializeAsync<AlarmConfig>(stream);
-    // if (alarmConfig == null) throw new Exception("No alarm config found");
-    // services.AddSingleton(alarmConfig);
+    var credentials = new DefaultAzureCredential();
+    var blobString = Environment.GetEnvironmentVariable("BLOB_URI");
+    if (string.IsNullOrEmpty(blobString)) throw new Exception("BLOB_URI not set");
+
+    var blobService = new BlobServiceClient(new Uri(blobString), credentials);
+    
+    var blobContainerName =  Environment.GetEnvironmentVariable("BLOB_CONTAINER");
+    if (string.IsNullOrEmpty(blobContainerName)) throw new Exception("BLOB_CONTAINER not set");
+    var containerClient =  blobService.GetBlobContainerClient(blobContainerName);
+    
+    var blobName = Environment.GetEnvironmentVariable("BLOB_NAME");
+    if (string.IsNullOrEmpty(blobName)) throw new Exception("BLOB_NAME not set");
+    var blobClient = containerClient.GetBlobClient(blobName);
+    
+    if (!await containerClient.ExistsAsync()) throw new Exception("Forecast alert not found");
+    
+    await using var stream = await blobClient.OpenReadAsync();
+    var alarmConfig = await JsonSerializer.DeserializeAsync<AlarmConfig>(stream);
+    if (alarmConfig == null) throw new Exception("No alarm config found");
+    services.AddSingleton(alarmConfig);
     
 });
 
