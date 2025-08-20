@@ -2,11 +2,8 @@
 bin/
 obj/
 
-# Data storage
-Tevling/storage/
-
 # Editor / IDE
 .vscode/
 .idea/
 
-Forecast.sln.DotSettings.user
+ForecastAlert.sln.DotSettings.user
