@@ -13,7 +13,7 @@ public class ForecastChecker(ILogger<ForecastChecker> logger, AlarmConfig alarmC
     {
         foreach (var location in alarmConfig.Locations)
         {
-            locationService.HandleLocation(location);
+            await locationService.HandleLocation(location);
         }
     }
 }

@@ -5,7 +5,7 @@ namespace ForecastAlert.Services;
 
 public class LocationService(ILogger<LocationService> logger, IAlarmService alarmService): ILocationService
 {
-    public void HandleLocation(Location location)
+    public async Task HandleLocation(Location location)
     {
         logger.LogInformation("Handling alarms for location: {LocationName}", location.LocationName);
         if (location.Alarms.Count == 0)
@@ -14,6 +14,6 @@ public class LocationService(ILogger<LocationService> logger, IAlarmService alar
             return;
         }
         
-        alarmService.HandleAlarms(location);
+        await alarmService.HandleAlarms(location);
     }
 }
