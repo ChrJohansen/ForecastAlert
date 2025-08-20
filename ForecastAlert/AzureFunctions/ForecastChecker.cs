@@ -9,7 +9,7 @@ public class ForecastChecker(ILogger<ForecastChecker> logger, AlarmConfig alarmC
 {
     [Function(nameof(ForecastChecker))]
     [FixedDelayRetry(5, "00:00:05")]
-    public async Task Run([TimerTrigger("0 0 9 * * MON")] TimerInfo timerInfo)
+    public async Task Run([TimerTrigger("%ForecastSchedule%")] TimerInfo timerInfo)
     {
         foreach (var location in alarmConfig.Locations)
         {
