@@ -1,4 +1,4 @@
-using ForecastAlert.domain;
+using ForecastAlert.Domain;
 using Microsoft.Extensions.Logging;
 
 namespace ForecastAlert.Services;

@@ -1,10 +1,5 @@
-using Forecast;
-using Forecast.domain;
-using ForecastAlert;
 using ForecastAlert.Clients;
-using ForecastAlert.domain;
-using ForecastAlert.Services;
-using ForecastAlert.domain;
+using ForecastAlert.Domain;
 using Microsoft.Extensions.Logging;
 
 namespace ForecastAlert.Services;

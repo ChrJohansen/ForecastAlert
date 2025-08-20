@@ -1,8 +1,9 @@
 using System.Text.Json;
-using Forecast.domain;
+using ForecastAlert.Domain;
+using ForecastAlert.DTO;
 using Microsoft.Extensions.Logging;
 
-namespace Forecast;
+namespace ForecastAlert.Clients;
 
 public class MetClient(ILogger<MetClient> logger, HttpClient httpClient, MetClientConfig config) : IMetClient
 {

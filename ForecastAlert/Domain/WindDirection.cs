@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace Forecast.domain;
+namespace ForecastAlert.Domain;
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum WindDirection

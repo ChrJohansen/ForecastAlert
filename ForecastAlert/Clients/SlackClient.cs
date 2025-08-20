@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace ForecastAlert;
+namespace ForecastAlert.Clients;
 
 public class SlackClient(HttpClient httpClient, SlackConfig slackConfig) : ISlackClient
 {

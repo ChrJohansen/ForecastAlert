@@ -1,4 +1,4 @@
-using ForecastAlert.domain;
+using ForecastAlert.Domain;
 
 namespace ForecastAlert.Services;
 

@@ -1,6 +1,5 @@
-using ForecastAlert.DTO;
 
-namespace ForecastAlert.domain;
+namespace ForecastAlert.Domain;
 
 public class AlarmConfig
 {

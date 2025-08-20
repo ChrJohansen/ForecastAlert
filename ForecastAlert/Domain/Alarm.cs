@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using ForecastAlert.domain;
 
 namespace ForecastAlert.Domain;
 

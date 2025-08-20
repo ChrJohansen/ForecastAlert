@@ -1,10 +1,9 @@
 ﻿using System.Text.Json;
 using Azure.Identity;
 using Azure.Storage.Blobs;
-using Forecast;
 using ForecastAlert;
 using ForecastAlert.Clients;
-using ForecastAlert.domain;
+using ForecastAlert.Domain;
 using ForecastAlert.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

@@ -1,4 +1,4 @@
-namespace ForecastAlert;
+namespace ForecastAlert.Clients;
 
 public interface ISlackClient
 {

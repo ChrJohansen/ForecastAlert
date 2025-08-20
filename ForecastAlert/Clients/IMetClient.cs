@@ -1,6 +1,8 @@
-using Forecast.domain;
 
-namespace Forecast;
+using ForecastAlert.Domain;
+using ForecastAlert.DTO;
+
+namespace ForecastAlert.Clients;
 
 public interface IMetClient
 {

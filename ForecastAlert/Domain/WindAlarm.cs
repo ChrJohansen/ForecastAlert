@@ -1,7 +1,4 @@
-using Forecast.domain;
-using ForecastAlert.Domain;
-
-namespace ForecastAlert.domain;
+namespace ForecastAlert.Domain;
 
 public class WindAlarm : Alarm
 {
