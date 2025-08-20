@@ -20,8 +20,14 @@ builder.ConfigureServices(void (services) =>
 
     var slackKey = Environment.GetEnvironmentVariable("SLACK_KEY");
     if (string.IsNullOrEmpty(slackKey)) throw new Exception("SLACK_KEY not set");
-
     services.AddSingleton(new SlackConfig { SlackKey = slackKey });
+    
+    
+    var metUserAgent = Environment.GetEnvironmentVariable("MET_USER_AGENT");
+    if (string.IsNullOrEmpty(metUserAgent)) throw new Exception("MET_USER_AGENT not set");
+    services.AddSingleton(new MetClientConfig() { UserAgent = metUserAgent });
+    
+    
     services.AddSingleton<IAlarmService, AlarmService>();
     services.AddSingleton<ILocationService, LocationService>();
 
