@@ -13,9 +13,6 @@ public class MetClient(ILogger<MetClient> logger, HttpClient httpClient) : IMetC
 
     public async Task<LocationForecast?> GetLocationForecast(string latitude, string longitude)
     {
-        var fromTime = DateTimeOffset.Now.ToString("yyyy-MM-ddTHH:mm");
-        var toTime = DateTimeOffset.Now.AddDays(3).ToString("yyyy-MM-ddTHH:mm");
-
         var uri = $"https://api.met.no/weatherapi/locationforecast/2.0/compact?lat={latitude}&lon={longitude}";
         using var requestMessage = new HttpRequestMessage(
             HttpMethod.Get, uri);
