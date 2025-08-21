@@ -1,5 +1,6 @@
 # ForecastAlert
 A [TimeTrigger](https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-timer?tabs=python-v2%2Cisolated-process%2Cnodejs-v4&pivots=programming-language-csharp) Azure function which lets the user monitor different weather conditions and notify if these exceed a specified threshold value.
+It can also be triggered manually with the `/manual` endpoint
 
 ## Setup
 ### Azure
@@ -16,7 +17,7 @@ This function requires some environment variables to work which will differ from
 - BLOB_NAME - See Blog Storage section
 - 
 #### App Setting
-- `ForecastSchedule` - Timetrigger Cron tab
+- `ForecastSchedule` - TimeTrigger Cron tab
 
 ### Slack
 You need to setup a workflow with a webhook containing a data variable named `my_message`.
