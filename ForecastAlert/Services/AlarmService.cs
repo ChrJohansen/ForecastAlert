@@ -20,7 +20,8 @@ public class AlarmService(
         }
 
         logger.LogInformation("Getting Tidal Forecast for: {LocationName}", locationName);
-        var tide = await kartverketClient.GetTidalForecast(latitude, longitude);
+        var tide = await kartverketClient.GetTidalForecast(latitude, longitude,
+            tidalAlarm.DaysToLookAhead.GetValueOrDefault(3));
 
         if (tide == null)
         {
@@ -39,6 +40,7 @@ public class AlarmService(
                 $"There is a forecast for high water levels (Over {tidalAlarm.MaxWaterLevels}cm) at {locationName} in the following days:\n{string.Join("\n", times)}";
             slackClient.publish(message);
         }
+
         logger.LogInformation("No high water levels for {LocationName} in the next few days", locationName);
     }
 
