@@ -18,7 +18,8 @@ This function requires some environment variables to work which will differ from
 #### App Setting
 - `ForecastSchedule` - Timetrigger Cron tab
 
-
+### Slack
+You need to setup a workflow with a webhook containing a data variable named `my_message`.
 
 ## Alert notification channels
 The function currently only support **ONE** notification channel, which is Slack. 
