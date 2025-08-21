@@ -14,7 +14,7 @@ public class ManualForecastChecker(
 {
     [Function(nameof(ManualForecastChecker))]
     public async Task<HttpResponseData> Run(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "/manual")]
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "manual")]
         HttpRequestData req)
     {
         logger.LogInformation("ForecastChecker has been manually triggered");
