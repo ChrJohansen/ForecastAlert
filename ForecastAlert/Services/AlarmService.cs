@@ -36,7 +36,7 @@ public class AlarmService(
         {
             var times = measurements.Select(i => DateTimeOffset.Parse(i.Time).ToString("yy-MM-dd")).Distinct().ToList();
             var message =
-                $"Det er meldt høy vannstand (Over {tidalAlarm.MaxWaterLevels}cm) ved {locationName} på følgende dager:\n{string.Join("\n", times)}";
+                $"There is a forecast for high water levels (Over {tidalAlarm.MaxWaterLevels}cm) at {locationName} in the following days:\n{string.Join("\n", times)}";
             slackClient.publish(message);
         }
         logger.LogInformation("No high water levels for {LocationName} in the next few days", locationName);
@@ -94,7 +94,7 @@ public class AlarmService(
         }
 
         var message =
-            $"Det er meldt kraftig vind (Over {windAlarm.MaxWindSpeed}m/s) ved {locationName} på følgende dager:\n{string.Join("\n", lines)}";
+            $"There is a forecast for string winds (Over {windAlarm.MaxWindSpeed}m/s) at {locationName} in the following days:\n{string.Join("\n", lines)}";
         slackClient.publish(message);
     }
 
