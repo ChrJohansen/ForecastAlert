@@ -84,4 +84,6 @@ Notify when the forecast exceeds the `MaxWaterLevels` threshold value
 - [MET LocationForecast 2.0 API](https://api.met.no/weatherapi/locationforecast/2.0/documentation) - [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
 ## License
+MIT License
 ## Copyright
+Copyright © 2025 - Christian Johansen
